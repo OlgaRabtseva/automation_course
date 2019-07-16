@@ -1,14 +1,8 @@
 package automationcourse.HW_Lesson_10;
 
+import automationcourse.HW_Lesson_12.MailRuPage;
 import automationcourse.pages.LoginPage;
-import automationcourse.pages.MailRuPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-
-import static automationcourse.Utils.RandomStringGeneratorUtil.randomChars;
 
 public class MailRuTest {
     private WebDriver driver;

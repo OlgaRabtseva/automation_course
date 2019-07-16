@@ -1,0 +1,34 @@
+19:58:32,994  INFO main HoroscopeTest:setUp:22 - Max window
+19:58:41,321  WARN main HoroscopeTest:setUp:24 - Open site
+19:58:41,480  INFO main HoroscopeTest:test:30 - Finding element
+19:58:41,547  INFO main HoroscopeTest:test:32 - Get text
+19:58:41,548  INFO main HoroscopeTest:test:34 - Get int
+19:58:41,551  INFO main HoroscopeTest:test:36 - Test is ended
+19:59:54,645  INFO main HoroscopeTest:setUp:22 - Max window
+20:00:00,854  WARN main HoroscopeTest:setUp:24 - Open site
+20:00:00,956  INFO main HoroscopeTest:test:30 - Finding element
+20:00:01,010  INFO main HoroscopeTest:test:32 - Get text
+20:00:01,010  INFO main HoroscopeTest:test:34 - Get int
+20:00:01,014 ERROR main HoroscopeTest:test:36 - Test is ended
+20:00:01,874  INFO main HoroscopeTest:tearDown:42 - Test complete
+22:34:32,215  INFO main VK_Test:postMessageOnTheWallTest:21 - For current test URL was hardcoded
+22:36:16,161  INFO main VK_Test:postMessageOnTheWallTest:21 - For current test URL was hardcoded
+22:36:20,785  INFO main VK_Test:postMessageOnTheWallTest:26 - Message posted
+22:36:21,584  INFO main VK_Test:editMessageOnTheWallTest:33 - Message edited
+22:36:22,243  INFO main VK_Test:deleteMessageOnTheWallTest:40 - Message deleted
+22:38:08,352  INFO main VK_Test:postMessageOnTheWallTest:21 - For current test URL was hardcoded
+22:38:12,758  INFO main VK_Test:postMessageOnTheWallTest:26 - Message posted
+22:38:13,258  INFO main VK_Test:editMessageOnTheWallTest:33 - Message edited
+22:38:13,661  INFO main VK_Test:deleteMessageOnTheWallTest:40 - Message deleted
+22:40:06,236  INFO main VK_Test:postMessageOnTheWallTest:21 - For current test URL was hardcoded
+22:40:11,438  INFO main VK_Test:postMessageOnTheWallTest:26 - Message posted
+22:40:12,145  INFO main VK_Test:editMessageOnTheWallTest:33 - Message edited
+22:40:12,753  INFO main VK_Test:deleteMessageOnTheWallTest:40 - Message deleted
+22:42:01,917  INFO main VK_Test:postMessageOnTheWallTest:21 - For current test URL was hardcoded
+22:42:08,883  INFO main VK_Test:postMessageOnTheWallTest:26 - Message posted
+22:42:09,494  INFO main VK_Test:editMessageOnTheWallTest:33 - Message edited
+22:42:10,115  INFO main VK_Test:deleteMessageOnTheWallTest:40 - Message deleted
+22:42:57,620  WARN main VK_Test:postMessageOnTheWallTest:21 - For current test URL was hardcoded
+22:43:02,654  INFO main VK_Test:postMessageOnTheWallTest:26 - Message posted
+22:43:03,437  INFO main VK_Test:editMessageOnTheWallTest:33 - Message edited
+22:43:04,043  INFO main VK_Test:deleteMessageOnTheWallTest:40 - Message deleted

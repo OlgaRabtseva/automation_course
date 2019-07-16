@@ -5,8 +5,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import ru.yandex.qatools.allure.annotations.Attachment;
 
 import static org.testng.Assert.assertTrue;
 
@@ -51,7 +54,12 @@ public class MailRuSteps {
 
     @Then("^I see email in 'Спам' folder$")
     public void checkSpamFolder() {
-        assertTrue((mailRuPage.openFolderAndFindElement(mailRuPage.sentFolder)).isDisplayed());
+        boolean elExist = (mailRuPage.openFolderAndFindElement(mailRuPage.sentFolder)).isDisplayed();
+        if(elExist) {
+            assertTrue(elExist);
+        } else {
+            makeScreenshot();
+        }
     }
 
     @When("^I send email from spam$")
@@ -72,27 +80,58 @@ public class MailRuSteps {
 
     @Then("^I don't see email in 'Входящие' folder$")
     public void i_don_t_see_email_in_Входящие_folder() {
-        assertTrue(mailRuPage.openFolderAndCheckElementNotExist(mailRuPage.inboxFolder));
+        boolean elNotExist = mailRuPage.openFolderAndCheckElementNotExist(mailRuPage.inboxFolder);
+        if(elNotExist) {
+            assertTrue(elNotExist);
+        } else {
+            makeScreenshot();
+        }
     }
 
     @Then("^I don't see email in 'Спам' folder$")
     public void i_don_t_see_email_in_Спам_folder() {
-        assertTrue(mailRuPage.openFolderAndCheckElementNotExist(mailRuPage.spamFolder));
+        boolean elNotExist = mailRuPage.openFolderAndCheckElementNotExist(mailRuPage.spamFolder);
+        if(elNotExist) {
+            assertTrue(elNotExist);
+        } else {
+            makeScreenshot();
+        }
     }
 
     @Then("^I see email in 'Входящие' folder$")
     public void i_see_email_in_Входящие_folder() {
-        assertTrue((mailRuPage.openFolderAndFindElement(mailRuPage.inboxFolder)).isDisplayed());
+        boolean elExist = (mailRuPage.openFolderAndFindElement(mailRuPage.inboxFolder)).isDisplayed();
+        if(elExist) {
+            assertTrue(elExist);
+        } else {
+            makeScreenshot();
+        }
     }
 
     @Then("^three emails is marked$")
     public void three_emails_is_marked() {
-        assertTrue(mailRuPage.amountOfMarkedEmails() >= 3);
+        boolean amount = mailRuPage.amountOfMarkedEmails() >= 3;
+        if(amount) {
+            assertTrue(amount);
+        } else {
+            makeScreenshot();
+        }
     }
 
     @Then("^all email is unmarked$")
     public void all_email_is_unmarked() {
-        assertTrue(mailRuPage.checkThatEmailsNotMarked());
+        boolean notMarked = mailRuPage.checkThatEmailsNotMarked();
+        if(notMarked) {
+            assertTrue(notMarked);
+        } else {
+            makeScreenshot();
+        }
+    }
+
+    @Attachment(value = "Attachment Screenshot", type = "image/png")
+    public byte[] makeScreenshot()
+    {
+        return ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
     }
 
     @After

@@ -49,7 +49,6 @@ public class RequestUtil {
         String requestResponse = null;
         try {
             requestResponse = EntityUtils.toString(response.getEntity());
-            System.out.println(requestResponse);
         } catch (IOException e) {
             e.printStackTrace();
         }
