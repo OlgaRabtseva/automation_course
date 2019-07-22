@@ -32,3 +32,10 @@
 22:43:02,654  INFO main VK_Test:postMessageOnTheWallTest:26 - Message posted
 22:43:03,437  INFO main VK_Test:editMessageOnTheWallTest:33 - Message edited
 22:43:04,043  INFO main VK_Test:deleteMessageOnTheWallTest:40 - Message deleted
+21:08:40,656  INFO main HoroscopeTest:setUp:21 - Max window
+21:08:44,638  WARN main HoroscopeTest:setUp:23 - Open site
+21:08:44,794  INFO main HoroscopeTest:test:29 - Finding element
+21:08:45,382  INFO main HoroscopeTest:test:31 - Get text
+21:08:45,383  INFO main HoroscopeTest:test:33 - Get int
+21:08:45,389 ERROR main HoroscopeTest:test:35 - Test is ended
+21:08:47,319  INFO main HoroscopeTest:tearDown:41 - Test complete

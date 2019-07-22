@@ -1,9 +1,13 @@
-package automationcourse.HW_Lesson_12;
+package pages;
 
-import automationcourse.Utils.RandomStringGeneratorUtil;
+import Utils.Email;
+import Utils.RandomStringGeneratorUtil;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +17,7 @@ import java.util.List;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class MailRuPage {
+    private static final Logger logger = Logger.getLogger(MailRuPage.class);
     private final String LOGIN = "o.rya@inbox.ru";
     private final String PASSWORD = "X7013107x&";
     private String topic;
@@ -71,10 +76,30 @@ public class MailRuPage {
     @FindBy(xpath = ".//div[@class='dataset__items']")
     private WebElement emailListElement;
 
+    @FindBy(xpath = ".//div[@class='new-folder-btn__button-wrapper']//*[@class='button2__txt']")
+    private WebElement newFolderBtn;
+
+    @FindBy(xpath = ".//input[@data-test-id='name']")
+    private WebElement newFolderName;
+
+    @FindBy(xpath = ".//button[@data-test-id='submit']")
+    private WebElement submitNewFolderBtn;
+
+    @FindBy(xpath = ".//a[@href='/1/']")
+    public WebElement newFolder;
+
+    @FindBy(xpath = ".//div[@data-qa-id='delete']")
+    private WebElement deleteFolderContextBtn;
+
+    @FindBy(xpath = ".//*[@class='button2__wrapper']//span[contains(text(), 'Удалить')]")
+    private WebElement deleteFolderModalBtn;
+
+
     public MailRuPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 15);
         PageFactory.initElements(driver, this);
+        logger.info("MailRu page is created");
     }
 
     public void doLogin() {
@@ -87,40 +112,51 @@ public class MailRuPage {
         }
     }
 
-    public void createAnEmail(String email_1, String email_2) {
+    public void createAnEmail(String email_1, String email_2, Email email) {
         writeAnEmailBtn.click();
         wait.until(visibilityOf(sendBtn));
         toWhomField.sendKeys(email_1," ",email_2);
-        topic = RandomStringGeneratorUtil.randomChars(7);
+        topic = RandomStringGeneratorUtil.randomChars(6);
         topicField.sendKeys(topic);
-        bodyField.sendKeys("Lorem ipsum dolor sit amet, consectetur adipiscing elit");
+        bodyField.sendKeys(email.getBody());
         sendBtn.click();
         wait.until(invisibilityOfElementLocated(By.xpath(".//span[@data-title-shortcut='Ctrl+Enter']")));
         if(closePopupBtn.isEnabled()) {
             closePopupBtn.click();
+            logger.info("Popup is enabled");
         }
     }
 
-    public void openNewEmail(String email_1, String email_2) {
-        writeAnEmailBtn.click();
-        wait.until(visibilityOf(sendBtn));
-        toWhomField.sendKeys(email_1," ",email_2);
+    public void createNewFolder(String folderName) {
+        newFolderBtn.click();
+        wait.until(visibilityOf(submitNewFolderBtn));
+        newFolderName.sendKeys(folderName);
+        submitNewFolderBtn.click();
     }
 
-    public void setTopic() {
-        topic = RandomStringGeneratorUtil.randomChars(7);
-        topicField.sendKeys(topic);
+    public void deleteFolder(String folderName) {
+        WebElement el = driver.findElement(By.xpath(String.format(".//*[contains(text(),'%s')]", folderName)));
+        Actions action = new Actions(driver);
+        action.contextClick(el).perform();
+        deleteFolderContextBtn.click();
+        wait.until(visibilityOf(deleteFolderModalBtn));
+        deleteFolderModalBtn.click();
+        inboxFolder.click();
     }
 
-    public void setBody() {
-        bodyField.sendKeys("Lorem ipsum dolor sit amet, consectetur adipiscing elit");
+    public boolean checkFolder(String folderName) {
+        wait.until(visibilityOfElementLocated(By.xpath(String.format(".//*[contains(text(),'%s')]", folderName))));
+        WebElement el = driver.findElement(By.xpath(String.format(".//*[contains(text(),'%s')]", folderName)));
+        return el.isDisplayed();
     }
 
-    public void sendEmail() {
-        sendBtn.click();
-        wait.until(invisibilityOfElementLocated(By.xpath(".//span[@data-title-shortcut='Ctrl+Enter']")));
-        if(closePopupBtn.isEnabled()) {
-            closePopupBtn.click();
+    public void checkFolderNotExist(String folderName) {
+        wait.until(invisibilityOfElementLocated(By.xpath(String.format(".//*[contains(text(),'%s')]", folderName))));
+        try {
+            driver.findElement(By.xpath(String.format(".//*[contains(text(),'%s')]", folderName)));
+            throw new RuntimeException("");
+        } catch (NoSuchElementException e) {
+            logger.info("Folder deleted");
         }
     }
 
@@ -183,7 +219,17 @@ public class MailRuPage {
     public WebElement openFolderAndFindElement(WebElement folder) {
         driver.navigate().refresh();
         wait.until(visibilityOf(folder));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         folder.click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         wait.until(visibilityOf(emailListElement));
         return emailListElement.findElement(By.partialLinkText(topic));
     }

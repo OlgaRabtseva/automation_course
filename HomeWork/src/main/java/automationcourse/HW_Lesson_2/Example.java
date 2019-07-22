@@ -2,6 +2,7 @@ package automationcourse.HW_Lesson_2;
 
 public class Example {
     public static void main(String[] args) {
+        Person person = new Person("Olga");
         final Student studentOlga = new Student("Olga", 35, 1, "PVT", 9.9);
         System.out.println("Name of student: " + studentOlga.getName());
         System.out.println("Department of student: " + studentOlga.getDepartment());

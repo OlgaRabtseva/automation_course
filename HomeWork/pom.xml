@@ -91,6 +91,13 @@
             <artifactId>java-client</artifactId>
             <version>${appium-java-client.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.applitools</groupId>
+            <artifactId>eyes-selenium-java3</artifactId>
+            <version>3.155.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

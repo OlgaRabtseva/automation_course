@@ -47,7 +47,7 @@ public class MailRuSteps {
         assertTrue((mailRuPage.openFolderAndFindElement(mailRuPage.sentFolder)).isDisplayed());
     }
 
-    @When("^I send email to spam$")
+    @When("^I move email to spam$")
     public void moveEmailToSpam(){
         mailRuPage.moveEmailToSpam();
     }
@@ -62,7 +62,7 @@ public class MailRuSteps {
         }
     }
 
-    @When("^I send email from spam$")
+    @When("^I move email from spam$")
     public void moveEmailFromSpam() {
         mailRuPage.moveEmailFromSpam();
     }
